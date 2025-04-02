@@ -58,7 +58,7 @@ This is a full-fledged **E-Commerce Application** built using **Flask** for the 
    ```
 5. **Run the application:**
    ```bash
-   python run.py
+   python wsgi.py
    ```
 6. **API Testing:**
    - Use **Postman** or **cURL** to test the APIs.
