@@ -1,81 +1,102 @@
-# E-Commerce Application
+# E-Commerce Backend
 
-## 📌 Project Overview
-This is a full-fledged **E-Commerce Application** built using **Flask** for the backend and **MongoDB** as the database. The application supports user authentication, product management, shopping cart functionality, and coupon-based discounts.
+This is the backend for an e-commerce platform built using **Flask**, providing APIs for authentication, product management, cart functionality, orders, and discount coupons.
 
-## 🚀 Features
-- **User Authentication** (JWT-based login & registration)
-- **Product Management** (CRUD operations)
-- **Shopping Cart** (Add, remove, update products)
-- **Coupon System** (Apply discount codes)
-- **Secure APIs** (Protected routes using Flask-JWT-Extended)
-- **Database**: MongoDB with Flask-PyMongo
+## Features
+- **User Authentication** (Register/Login with JWT)
+- **Product Management** (Add, Update, Delete, Fetch Products)
+- **Cart Management** (Add to Cart, Remove, Fetch Cart Items)
+- **Order Processing** (Place Order, Track Order)
+- **Coupon System** (Apply Discount Coupons)
 
-## 🏗️ Tech Stack
-- **Backend**: Flask, Flask-JWT-Extended, Flask-PyMongo
-- **Database**: MongoDB
-- **Authentication**: JSON Web Tokens (JWT)
-- **Other Tools**: Docker, Postman (for API testing)
+## Tech Stack
+- **Flask** (Python Backend Framework)
+- **Flask-JWT-Extended** (Authentication)
+- **MongoDB** (Database)
+- **Docker** (Optional - Containerization)
 
-## 📂 Project Structure
-```
-├── app
-│   ├── routes
-│   │   ├── auth.py          # User authentication routes
-│   │   ├── products.py      # Product management routes
-│   │   ├── cart.py          # Shopping cart routes
-│   │   ├── discount.py      # Coupon system
-│   ├── models.py           # Database models
-│   ├── config.py           # App configuration
-├── tests                   # Unit tests
-├── requirements.txt        # Required dependencies
-├── run.py                  # Application entry point
-└── README.md               # Project documentation
-```
+## Installation
+### Prerequisites
+- Python 3.x installed
+- MongoDB installed and running
 
-## 🔧 Installation & Setup
-1. **Clone the repository:**
+### Setup
+1. **Clone the Repository**
    ```bash
    git clone https://github.com/simonisavani/e-commerce.git
    cd e-commerce
    ```
-2. **Create a virtual environment & activate it:**
+2. **Create a Virtual Environment** (Recommended)
    ```bash
    python -m venv venv
-   source venv/bin/activate   # On macOS/Linux
-   venv\Scripts\activate      # On Windows
+   source venv/bin/activate  # On Windows use 'venv\Scripts\activate'
    ```
-3. **Install dependencies:**
+3. **Install Dependencies**
    ```bash
    pip install -r requirements.txt
    ```
-4. **Set up environment variables:**
-   - Create a `.env` file and add the following:
+4. **Set Environment Variables** (Create `.env` file)
    ```
    SECRET_KEY=your_secret_key
    MONGO_URI=mongodb://localhost:27017/ecommerce
-   JWT_SECRET_KEY=your_jwt_secret_key
    ```
-5. **Run the application:**
+5. **Run the Application**
    ```bash
-   python wsgi.py
+   flask run
    ```
-6. **API Testing:**
-   - Use **Postman** or **cURL** to test the APIs.
 
-## ✅ API Endpoints
-| Method | Endpoint          | Description                     |
-|--------|------------------|---------------------------------|
-| POST   | /auth/register   | Register a new user            |
-| POST   | /auth/login      | Login user & get JWT token     |
-| GET    | /products        | Get all products               |
-| POST   | /products        | Add a new product (Admin)      |
-| PUT    | /cart/add        | Add a product to the cart      |
-| POST   | /coupon          | Apply a discount code          |
+## API Endpoints
+### Authentication
+| Method | Endpoint       | Description          |
+|--------|--------------|----------------------|
+| POST   | /auth/register | Register User       |
+| POST   | /auth/login    | User Login (JWT)    |
 
-## 🛠️ Deployment (Optional)
-To deploy using **Docker**:
-```bash
-docker build -t ecommerce-app .
-docker run -p 5000:5000 ecommerce-app
-```
+### Products
+| Method | Endpoint                 | Description          |
+|--------|---------------------------|----------------------|
+| POST   | /api/products             | Add Product         |
+| GET    | /api/products             | Get All Products    |
+| GET    | /api/products/<product_id> | Get Single Product  |
+| PUT    | /api/products/<product_id> | Update Product      |
+| DELETE | /api/products/<product_id> | Delete Product      |
+
+### Cart
+| Method | Endpoint           | Description       |
+|--------|-------------------|-----------------|
+| POST   | /api/cart         | Add to Cart     |
+| GET    | /api/cart         | Get Cart Items  |
+| DELETE | /api/cart/<cart_id> | Remove Item    |
+
+### Orders
+| Method | Endpoint              | Description          |
+|--------|----------------------|----------------------|
+| POST   | /api/order           | Place Order         |
+| GET    | /api/order/<order_id> | Track Order Status  |
+
+### Discounts
+| Method | Endpoint      | Description      |
+|--------|--------------|------------------|
+| POST   | /api/coupon  | Apply Coupon Code |
+
+## Deployment
+### Using Docker
+1. **Build the Docker Image**
+   ```bash
+   docker build -t ecommerce-backend .
+   ```
+2. **Run the Container**
+   ```bash
+   docker run -p 5000:5000 ecommerce-backend
+   ```
+
+### Deployment to Cloud
+- Can be deployed on **Heroku, AWS, Render, or DigitalOcean**.
+- Use **Gunicorn** as WSGI server for production.
+- Store environment variables securely.
+
+## Contributing
+Pull requests are welcome! For major changes, open an issue first to discuss improvements.
+
+
+
