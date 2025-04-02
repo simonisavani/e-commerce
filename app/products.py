@@ -1,12 +1,21 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, current_app
 from flask_jwt_extended import jwt_required, get_jwt
 from bson.objectid import ObjectId
 from app.config import db, CACHE_CONFIG
 from flask_caching import Cache
 import json
 
-cache = Cache(config=CACHE_CONFIG)
+
 product_bp = Blueprint('product', __name__)
+
+
+cache = Cache()
+
+
+
+@product_bp.before_app_request
+def setup_cache():
+    cache.init_app(current_app, config=CACHE_CONFIG)  # Initialize with Flask app
 
 # -------------------------------
 # 🔹 GET ALL PRODUCTS (CACHED)
